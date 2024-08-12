@@ -1,3 +1,6 @@
+# secrets
+.dev.vars
+
 # dependencies
 node_modules
 
