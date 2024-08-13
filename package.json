@@ -6,16 +6,19 @@
   "private": true,
   "packageManager": "pnpm@9.7.0+sha512.dc09430156b427f5ecfc79888899e1c39d2d690f004be70e05230b72cb173d96839587545d09429b55ac3c429c801b4dc3c0e002f653830a420fa2dd4e3cf9cf",
   "scripts": {
-    "deploy": "wrangler deploy",
+    "cf-typegen": "wrangler types",
+    "register": "pnpm tsc --module nodenext --target esnext --moduleResolution nodenext ./src/register.ts && pnpm node src/register.js && rm src/*.js",
     "dev": "wrangler dev",
     "start": "wrangler dev",
-    "cf-typegen": "wrangler types",
-    "ngrok": "ngrok http http://localhost:8787"
+    "ngrok": "ngrok http http://localhost:8787",
+    "deploy": "wrangler deploy"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20240806.0",
     "@eslint/js": "^9.9.0",
     "@tsconfig/node20": "^20.1.4",
+    "@types/node": "^22.2.0",
+    "dotenv": "^16.4.5",
     "eslint": "^9.9.0",
     "prettier": "^3.3.3",
     "typescript": "^5.5.4",

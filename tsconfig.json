@@ -2,7 +2,7 @@
   "extends": "@tsconfig/node20/tsconfig.json",
   "include": ["src", "./worker-configuration.d.ts"],
   "compilerOptions": {
-    "types": ["@cloudflare/workers-types"],
+    "types": ["@cloudflare/workers-types", "node"],
     "forceConsistentCasingInFileNames": true,
     "isolatedModules": true,
     "noEmit": true
