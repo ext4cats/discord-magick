@@ -9,7 +9,8 @@
     "deploy": "wrangler deploy",
     "dev": "wrangler dev",
     "start": "wrangler dev",
-    "cf-typegen": "wrangler types"
+    "cf-typegen": "wrangler types",
+    "ngrok": "ngrok http http://localhost:8787"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20240806.0",
