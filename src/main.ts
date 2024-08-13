@@ -1,6 +1,6 @@
-import verifyDiscordRequest from './verifyDiscordRequest.js';
-import Interaction from './interaction.js';
-import DiscordResponse from './discordResponse.js';
+import verifyDiscordRequest from './discord/verifyDiscordRequest.js';
+import Interaction from './discord/interaction.js';
+import DiscordResponse from './discord/discordResponse.js';
 
 export interface Env {
   DISCORD_PUBLIC_KEY: string;
