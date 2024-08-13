@@ -8,7 +8,7 @@ function hexToUint8(hexString: string): Uint8Array {
   return Uint8Array.from(match.map((byte) => parseInt(byte, 16)));
 }
 
-async function verifyDiscordRequest(
+export default async function verifyDiscordRequest(
   request: Request,
   publicKey: string,
 ): Promise<boolean> {
@@ -27,5 +27,3 @@ async function verifyDiscordRequest(
     return false;
   }
 }
-
-export default verifyDiscordRequest;
