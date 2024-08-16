@@ -7,7 +7,7 @@
   "packageManager": "pnpm@9.7.0+sha512.dc09430156b427f5ecfc79888899e1c39d2d690f004be70e05230b72cb173d96839587545d09429b55ac3c429c801b4dc3c0e002f653830a420fa2dd4e3cf9cf",
   "scripts": {
     "cf-typegen": "wrangler types",
-    "register": "pnpm tsc --module nodenext --target esnext --moduleResolution nodenext ./src/register.ts && pnpm node src/register.js && rm src/*.js",
+    "register": "pnpm tsc --module nodenext --target esnext --moduleResolution nodenext ./src/register.ts && pnpm node src/register.js && find ./src/ -name \"*.js\" -type f -delete",
     "dev": "wrangler dev",
     "start": "wrangler dev",
     "ngrok": "ngrok http http://localhost:8787",
