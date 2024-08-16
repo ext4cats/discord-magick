@@ -25,7 +25,9 @@ async function registerCommands() {
         Authorization: `Bot ${token}`,
       },
       method: 'PUT',
-      body: JSON.stringify(Object.keys(commands).map((key) => commands[key])),
+      body: JSON.stringify(
+        Object.keys(commands).map((key) => commands[key].toJSON()),
+      ),
     });
 
     if (response.ok) {
