@@ -1,9 +1,22 @@
 import verifyDiscordRequest from './discord/verifyDiscordRequest.js';
 import Interaction from './discord/interaction.js';
 import DiscordResponse from './discord/discordResponse.js';
+import getAttachmentURLs from './discord/getAttachmentURLs.js';
+import { commands } from './commands.js';
 
 export interface Env {
   DISCORD_PUBLIC_KEY: string;
+}
+
+async function executeCommand(
+  name: string,
+  imageURLs: string[],
+): Promise<DiscordResponse> {
+  const command = commands[name];
+  if (!command) {
+    return new Response('Unknown command name', { status: 400 });
+  }
+  return command.execute(imageURLs);
 }
 
 async function handleRequest(request: Request): Promise<Response> {
@@ -14,19 +27,21 @@ async function handleRequest(request: Request): Promise<Response> {
     return new Response('Invalid JSON body', { status: 400 });
   }
 
-  // DEBUG
-  console.log(body);
-
   if (body.type === 1) {
     return new DiscordResponse({ type: 1 });
   }
 
   if (body.type === 2 && body.data) {
-    switch (body.data.name) {
-      case 'ping': {
-        return new DiscordResponse({ type: 4, data: { content: 'Pong!' } });
-      }
+    const attachmentURLs = getAttachmentURLs(body);
+    if (!attachmentURLs) {
+      return new DiscordResponse({
+        type: 4,
+        data: {
+          content: 'Found no images to process',
+        },
+      });
     }
+    return await executeCommand(body.data.name, attachmentURLs);
   }
 
   return new Response('Unknown request type', { status: 400 });
