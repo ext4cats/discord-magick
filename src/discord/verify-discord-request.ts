@@ -1,7 +1,7 @@
 import nacl from 'tweetnacl';
 import { Buffer } from 'node:buffer';
 
-export default async function verifyDiscordRequest(
+export async function verifyDiscordRequest(
   request: Request,
   publicKey: string,
 ): Promise<boolean> {

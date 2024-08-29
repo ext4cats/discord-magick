@@ -1,7 +1,7 @@
-import verifyDiscordRequest from './discord/verifyDiscordRequest.js';
-import Interaction from './discord/interaction.js';
-import DiscordResponse from './discord/discordResponse.js';
-import getAttachmentURLs from './discord/getAttachmentURLs.js';
+import { verifyDiscordRequest } from './discord/verify-discord-request.js';
+import { Interaction } from './discord/interaction.js';
+import { getAttachmentURLs } from './discord/get-attachment-urls.js';
+import { DiscordResponse } from './discord/discord-response.js';
 import { commands } from './commands.js';
 
 export interface Env {
@@ -19,7 +19,7 @@ async function executeCommand(
   return command.execute(imageURLs);
 }
 
-async function handleRequest(request: Request): Promise<Response> {
+async function handleDiscordRequest(request: Request): Promise<Response> {
   let body: Interaction;
   try {
     body = (await request.json()) as Interaction;
@@ -33,7 +33,7 @@ async function handleRequest(request: Request): Promise<Response> {
 
   if (body.type === 2 && body.data) {
     const attachmentURLs = getAttachmentURLs(body);
-    if (!attachmentURLs) {
+    if (attachmentURLs.length === 0) {
       return new DiscordResponse({
         type: 4,
         data: {
@@ -50,7 +50,7 @@ async function handleRequest(request: Request): Promise<Response> {
 export default {
   async fetch(request: Request, env: Env) {
     return (await verifyDiscordRequest(request, env.DISCORD_PUBLIC_KEY))
-      ? handleRequest(request)
+      ? handleDiscordRequest(request)
       : new Response('Invalid request signature', { status: 401 });
   },
 } satisfies ExportedHandler<Env>;

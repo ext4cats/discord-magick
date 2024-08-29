@@ -1,4 +1,4 @@
-export default class DiscordResponse extends Response {
+export class DiscordResponse extends Response {
   constructor(body: object) {
     super(JSON.stringify(body), {
       headers: {

@@ -11,7 +11,7 @@ interface Message {
   attachments: Attachment[];
 }
 
-export default interface Interaction {
+export interface Interaction {
   type: number;
   data: {
     target_id: string;
