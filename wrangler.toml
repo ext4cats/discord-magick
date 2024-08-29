@@ -1,6 +1,7 @@
 name = "discord-magick"
 main = "src/main.ts"
 compatibility_date = "2024-08-11"
+compatibility_flags = [ "nodejs_compat" ]
 
 [vars]
 DISCORD_PUBLIC_KEY = "c6bcbaf954c3aa5e7f19e838644a2cc75c7aa982f6ed2bc20d8aa5a6c6d9fbbc"
